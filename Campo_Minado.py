@@ -1,14 +1,3 @@
-#Nesse projeto eu irei desenvolver o jogo "Campo minado" que rodará no terminal.
-''' Como funciona: Será apresentado um campo de acordo com as medidas que o jogador informar e com a quantidade de bombas que ele quiser,
-    esse campo não apresentará as bombas e nem os espaços limpos, ele sera ocultado por quadrados, o campo com as informações de localização
-    das bombas só será informado se o jogador usar a trapaça.
-    
-    Regras: a linha e a coluna serão dadas em uma única linha e irá representar as coordenadas escolhidas. Se for uma bomba, o jogador perde, se
-    não for, será revelado a qauntidade bombas nas 8 posições adjacentes, se o quantidade for nula, as 8 posições serão reveladas. Caso algumas das
-    posições também tiver 8 posições livres ao seu redor, essas também serão reveladas, e assim sucessivamente.
-    O jogador vence se restar apenas bombas e todas as posições vazias tiverem sidas escolhidas.'''
-
-
 import random  #Importar random para fazer a escolha das bombas
 def geracao_campo(numero):#primeira função feita, ela irá gerar o campo que o jogador irá ver.
     matriz_visivel=[] #chamaremos de matriz visível 
