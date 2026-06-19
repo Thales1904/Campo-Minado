@@ -1,5 +1,3 @@
-
-
 import random  #Importar random para fazer a escolha das bombas
 def geracao_campo(numero):#primeira função feita, ela irá gerar o campo que o jogador irá ver.
     matriz_visivel=[] #chamaremos de matriz visível 
