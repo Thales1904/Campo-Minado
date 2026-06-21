@@ -1,4 +1,5 @@
 import random  #Importar random para fazer a escolha das bombas
+import time
 def geracao_campo(numero):#primeira função feita, ela irá gerar o campo que o jogador irá ver.
     matriz_visivel=[] #chamaremos de matriz visível 
     for linhas in range(numero):
@@ -137,9 +138,18 @@ def jogo(geracao_campo, invisivel, exibicao_campo, trapaca, bombas_adjacentes, b
     #aqui pedimos as informações ao jogador
     print('           Campo Minado          ')
     nome= input('Seu nome:').title()
-    numero = int(input("Medida do campo:"))
-    bombas = int(input(f"N° de bombas (Máx:{int(0.5*(numero**2))}):"))
-
+    numero = int(input("Medida do campo (EX: 9):"))
+    print('Dica: Não coloque muitas bombas, pode dificultar muito seu jogo!')
+    bombas = int(input(f"N° de bombas (Máx Recomendado:{int(0.5*(numero**2))}):"))
+    pergunta= input('Você conhece as regras? (Sim/Não):').lower()
+    if pergunta=='não' or pergunta== 'nao':
+        print(f'Regras:\nO campo vai será quadrado de acordo com a medidia especificada.\nSerá perguntado as coordenadas da jogada (EX: L C: 2 3). Linha e coluna serão dadas com UM espaço.\nSe você escolher uma bomba, perde, se não, será revelado a quantidade de bombas nas 8 posições adjacentes.\nSe as 8 adjacentes não tiverem bombas, todas as posições serão reveladas.\nEssa mecânica funcionará em efeito cascata caso as 8 adjacentes também não tiverem nenhuma bomba ao redor.\nPor fim, o jogo acaba quando só restarem bombas no tabuleiro. Boa sorte!')
+        time.sleep(3)
+    else:
+        time.sleep(1.5)
+    print()
+    print(f'Tudo bem, {nome}. Boa sorte! O jogo vai começar.')
+    time.sleep(1.67)  
     #vamos chamar as funções de campo visivel e invisivel fora da repetição, já que elas serão constantememte atualizadas
     #colocamos em variáveis  
     dados_campo= invisivel(numero, bombas)
@@ -164,16 +174,30 @@ def jogo(geracao_campo, invisivel, exibicao_campo, trapaca, bombas_adjacentes, b
 
         if dados_campo[coordenada_x][coordenada_y]== '●': #se uma bomba for escolhida, o jogo acaba 
             print('Você Perdeu!')
+            print('Gabarito:')
+            trapaca(dados_visuais, dados_campo, numero)
             break
         else:
             bombas_cascatas(dados_campo, dados_visuais, coordenada_x, coordenada_y, numero) #se não, chamamos a bomba cascata que por si só já chamará a bombas adjacentes
-                
+
+            quadrados=0  
             for linha in dados_visuais:
-                quadrados= linha.count('▪') #contamos quantos quadrados tem no tabuleiro
+                quadrados+= linha.count('▪') #contamos quantos quadrados tem no tabuleiro
             
             if quadrados==bombas:#se esse numero for igual ao numero de bombas, so restaram bombas, então o jogador venceu
                 print('Você venceu!')
+                print('Gabarito:')
+                trapaca(dados_visuais, dados_campo, numero)
                 break
 
 #por fim, chamamos a função final
 jogo(geracao_campo, invisivel, exibicao_campo, trapaca, bombas_adjacentes, bombas_cascatas)
+while True:
+    pergunta= input('Deseja jogar de novo? (Sim/Não):').lower()
+    if pergunta== 'sim':
+        print('Carregando seu próximo jogo...')
+        time.sleep(1.5)
+        jogo(geracao_campo, invisivel, exibicao_campo, trapaca, bombas_adjacentes, bombas_cascatas)
+    else:
+        final=input('Obrigado por jogar! Aperte qualquer tecla e enter para sair:')
+        break
