@@ -65,3 +65,9 @@ Este projeto foi desenvolvido para praticar:
 * Recursão e propagação de áreas vazias;
 * Organização de código em funções;
 * Desenvolvimento de jogos em terminal.
+
+## Autor
+
+**Thales Trajano**
+
+GitHub: [@Thales1904](https://github.com/Thales1904)
